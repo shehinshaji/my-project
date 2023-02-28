@@ -1,0 +1,134 @@
+---
+- name: Install and start Docker, and copy Dockerfile,warfile,then build docker image and push to docker hub
+  hosts: all
+  remote_user: root
+  become: true  
+  tasks:
+    - name: Install development tools and dependencies
+      yum:
+        name:
+          - gcc
+          - openssl-devel
+          - bzip2-devel
+          - libffi-devel
+          - zlib-devel
+        state: present
+
+    - name: Check if pip is installed
+      stat:
+        path: /usr/bin/pip3
+      register: pip_status
+      vars:
+        ansible_python_interpreter: /bin/python3
+
+    - name: Install pip for Python 3
+      yum:
+        name: python3-pip
+        state: present
+      when: not pip_status.stat.exists
+      vars:
+        ansible_python_interpreter: /bin/python3
+
+    - name: Check if requests library is installed
+      command: "pip3 show requests"
+      register: requests_status
+      ignore_errors: true
+      vars:
+        ansible_python_interpreter: /bin/python3
+
+    - name: Install requests library
+      pip:
+        name: requests
+      when: requests_status.rc != 0
+      vars:
+        ansible_python_interpreter: /bin/python3
+
+    - name: Check if Python 3.7 is already installed
+      command: "python3.7 --version"
+      register: python_version
+      ignore_errors: true
+      changed_when: false
+
+    - name: Download Python 3.7 source code
+      get_url:
+        url: "https://www.python.org/ftp/python/3.7.10/Python-3.7.10.tgz"
+        dest: "/tmp/Python-3.7.10.tgz"
+      when: python_version.rc != 0
+    
+    - name: Extract Python 3.7 source code
+      unarchive:
+        src: "/tmp/Python-3.7.10.tgz"
+        dest: "/tmp"
+        remote_src: true
+        creates: "/tmp/Python-3.7.10"
+      when: python_version.rc != 0
+
+    - name: Configure Python 3.7
+      shell: "./configure --enable-optimizations"
+      args:
+        chdir: "/tmp/Python-3.7.10"
+      when: python_version.rc != 0
+
+    - name: Build and install Python 3.7
+      shell: "make altinstall"
+      args:
+        chdir: "/tmp/Python-3.7.10"
+      when: python_version.rc != 0
+
+    - name: Remove Python source code
+      file:
+        path: "/tmp/Python-3.7.10"
+        state: absent
+      when: python_version.rc != 0
+          
+    - name: Install Docker
+      yum:
+        name: docker
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create a  directory
+      file:
+        path: /root/dockerbuild
+        state: directory
+
+    - name: Create another directory
+      file:
+        path: /root/dockerbuild/warfile
+        state: directory
+
+    - name: delete contents inside warfile
+      command: rm -rf /root/dockerbuild/warfile/*
+
+    - name: copy warfile to docker server
+      copy:
+        src: /home/ansadmin/instanceconfigure/warfile/artifact.war
+        dest: /root/dockerbuild/warfile
+
+    - name: Copy Dockerfile
+      copy:
+        src: /home/ansadmin/instanceconfigure/dockerfile
+        dest: /root/dockerbuild
+        mode: '0644'
+        
+    - name: Delete custom image
+      command: docker image inspect username/repositoryname:version.{{ jenkins_build_number }} &> /dev/null && docker rmi username/repositoryname:version.{{ jenkins_build_number }}
+      ignore_errors: true
+
+    - name: build the image
+      command: docker build -t username/repositoryname:version.{{ jenkins_build_number }}  /root/dockerbuild/
+        
+    - name: Log in to Docker Hub
+      command: docker login -u username -p password
+
+    - name: Push Docker image to Docker Hub
+      command: docker push username/repositoryname:version.{{ jenkins_build_number }}     
+
+    - name: Delete the images after pushing to dockerhub
+      command: docker image inspect username/repositoryname:version.{{ jenkins_build_number }} &> /dev/null && docker rmi username/repositoryname:version.{{ jenkins_build_number }}    
+

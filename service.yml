@@ -1,0 +1,14 @@
+kind: Service                             
+apiVersion: v1
+metadata:
+  name: myapp
+  labels:
+    app: myapp
+spec:
+  ports:
+    - port: 8080                               
+      targetPort: 8080   
+      nodePort: 31200        
+  selector:
+    app: myapp                    
+  type: NodePort
