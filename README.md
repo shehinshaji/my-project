@@ -5,7 +5,7 @@ My aim of this project was using aws services like EC2 and EKS create some virtu
 continuously integrate the changes made in application code and deploy it on EKS cluster as a containerized web application.
 And the main aim is to integrate all the tools i studied with this CI/CD project like GIT & GITHUB,MAVEN,JENKINS,ANSIBLE,TERRAFORM,DOCKER,KUBERNETES(EKS).
 
-# Let's Start
+## Let's Start
 First create 4 Amazon linux Instances in aws on same region and name the servers as : -
 
 1,Jenkinserver
@@ -13,9 +13,21 @@ First create 4 Amazon linux Instances in aws on same region and name the servers
 3,Terraformserver
 4,kubernetesserver
 
-# Let's take Jenkinserver
-In jenkin server install git,maven and jenkins.
-GIT INSTALLATION:-
-sudo yum update -y
-sudo yum install git -y
-git version
+## Let's goto Jenkinserver
+In jenkin server install : -
+.GIT
+.MAVEN
+.JENKINS
+Then create an new user "jenkinsadmin" and set password and give root user privileges:-
+```
+useradd jenkinsadmin
+passwd jenkinsadmin
+passwd root
+visudo
+jenkinsadmin ALL=(ALL:ALL) NOPASSWD: ALL
+:wq!
+vi /etc/ssh/sshd_config
+PasswordAuthentication yes
+systemctl restart sshd
+```
+## Goto 
