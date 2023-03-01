@@ -21,6 +21,18 @@ In jenkin server install : -
 .GIT
 .MAVEN
 .JENKINS
+
+GIT INSTALLATION :- 
+```
+sudo yum update -y
+sudo yum install git -y
+git version
+```
+MAVEN INSTALLATION :- 
+To install Maven,refer the below url,
+```
+https://devopscube.com/install-maven-guide/
+```
 Then create an new user "jenkinsadmin" and set password and give root user privileges:-
 ```
 useradd jenkinsadmin
@@ -34,7 +46,13 @@ PasswordAuthentication yes
 systemctl restart sshd
 ```
 ### Goto Terraform server
-In terraformserver install and setup terraform and then create a user "tefadmin" and set password and give root user privileges as done in jenkinserver.
+In terraformserver install and setup terraform.
+Terraform Installation:-
+To install Terraform,refer the below url,
+```
+https://www.ktexperts.com/how-to-install-terraform-in-amazon-ec2-instance/
+```
+And then create a user "tefadmin" and set password and give root user privileges as done in jenkinserver.
 Then just create a file  "id_rsa.pub" and create a directory "dockerserver".
 ```
 touch /home/tefadmin/id_rsa.pub
@@ -47,7 +65,19 @@ vi main.tf
 :wq!
 ```
 ### Goto Ansible server
-In Ansible server install and setup ansible and also an dynamic inventory.Then create a user "ansadmin" and set password and give root user privileges as done previously.
+In Ansible server install and setup ansible.
+Ansible installation:-
+To install Ansible,refer the below url,
+```
+https://www.ktexperts.com/how-to-install-ansible-in-amazon-linux-machine/
+```
+Then also setup an dynamic inventory.
+Dynamic inventory setup:-
+To setup dynamic inventory,refer below url,
+```
+https://www.shubhammishra.in/2022/03/05/ansible-aws-ec2-dynamic-inventory/
+```
+Then create a user "ansadmin" and set password and give root user privileges as done previously.
 Then copy and paste the attached deletescript.sh on the path /home/ansadmin and also create an directory "dockerconfigure" and inside dockerconfigure create another directory "warfile".
 ```
 mkdir /home/ansadmin/dockerconfigure
