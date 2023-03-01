@@ -84,3 +84,27 @@ Then goto "manage jenkins" -> "global tool configuration" -> select "git" -> "Pa
 Then select "maven" -> "maven installation" -> "MAVEN_HOME" -> enter "/opt/maven/apache-maven-3.8.7"
 
 Then apply -> save
+
+### Then, 
+```
+select "New item" -> "Freestyle project" -> Enter name for the project -> "OK"
+```
+## Fresstyle Project
+```
+In "Description" column -> Enter "Description :- This is my own project which includeds git,github,maven,jenkins,ansible,terraform,docker and kubernetes"
+```
+```
+Then,In "source code mangement" ->  select "git" -> "Add repository url and credentials" -> "build to manage" -> Enter "*/master"
+```
+```
+Then in, "build triggers" -> select "POLL SCM" and enter "* * * * *".(This cron expression check for any change in github repository and get triggered,you can also use GitHub hook trigger for GITScm polling and in that case you have to configure in github under webhook section with jenkins public ip address
+```
+```
+Then in, "Build Environment" -> select "Delete workspace before build starts"
+```
+
+
+
+
+
+
