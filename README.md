@@ -10,18 +10,19 @@ There are 4 servers that are jenkinserver,ansibleserver,terraformserver and kube
 
 ### Let's Start
 First create 4 Amazon linux Instances in aws on same region and name the servers as : -
-
-1,Jenkinserver
-2,Ansibleserver
-3,Terraformserver
-4,kubernetesserver
-
+~~~
+1)Jenkinserver
+2)Ansibleserver
+3)Terraformserver
+4)kubernetesserver
+~~~
 ### Let's goto Jenkinserver
 In jenkin server install : -
-.GIT
-.MAVEN
-.JENKINS
-
+~~~
+•GIT
+•MAVEN
+•JENKINS
+~~~
 GIT INSTALLATION :- 
 ```
 sudo yum update -y
