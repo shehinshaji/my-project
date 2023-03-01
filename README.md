@@ -34,6 +34,11 @@ To install Maven,refer the below url,
 ```
 https://devopscube.com/install-maven-guide/
 ```
+JENKIN INSTALLATION :- 
+To install Jenkin,refer the below url,
+~~~
+
+~~~
 Then create an new user "jenkinsadmin" and set password and give root user privileges:-
 ```
 useradd jenkinsadmin
