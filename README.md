@@ -73,3 +73,14 @@ Then create an directory manifest in /home/kubeadmin
 mkdir /home/kubeadmin/manifest
 ```
 Then inside manifest copy and paste the attached deployment and service yaml files.
+
+## Let's build the jenkin job
+
+Firstly install "PUBLISH OVER SSH PLUGIN" in jenkins and after installation add the "jenkinserver,ansibleserver,terraformserver & kubernetes server" in "manage jenkins" -> "Configure system" -> "publish over ssh"
+Note :- put the users as the sudo users we created in each server and put remote directory as their path to home directory.eg:- /home/jenkiserver
+
+Then goto "manage jenkins" -> "global tool configuration" -> select "git" -> "Path to Git executable column" -> /usr/bin/git
+
+Then select "maven" -> "maven installation" -> "MAVEN_HOME" -> enter "/opt/maven/apache-maven-3.8.7"
+
+Then apply -> save
