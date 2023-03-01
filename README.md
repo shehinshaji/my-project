@@ -54,7 +54,7 @@ systemctl restart sshd
 ### Goto Terraform server
 In terraformserver install and setup terraform.
 
-Terraform Installation:-
+TERRAFORM INSTALLATION:-
 To install Terraform,refer the below url,
 ```
 https://www.ktexperts.com/how-to-install-terraform-in-amazon-ec2-instance/
@@ -74,14 +74,14 @@ vi main.tf
 ### Goto Ansible server
 In Ansible server install and setup ansible.
 
-Ansible installation:-
+ANSIBLE INSTALLATION:-
 To install Ansible,refer the below url,
 ```
 https://www.ktexperts.com/how-to-install-ansible-in-amazon-linux-machine/
 ```
 Then also setup an dynamic inventory.
 
-Dynamic inventory setup:-
+DYNAMIC INVENTORY SETUP:-
 To setup dynamic inventory,refer below url,
 ```
 https://www.shubhammishra.in/2022/03/05/ansible-aws-ec2-dynamic-inventory/
