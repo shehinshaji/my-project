@@ -60,6 +60,15 @@ ssh-keygen
 ```
 Then copy the "id_rsa.pub" to terraform server's /home/tefadmin/id_rsa.pub
 
+Then goto /etc/ansible/ansible.cfg and under [defaults] & [inventory] add below lines:- 
+```
+[defaults]
+inventory = /opt/ansible/inventory/aws_ec2.yaml
+host_key_checking = False
+
+[inventory]
+enable_plugins = aws_ec2
+```
 ### Goto Kubernetes server
 In kubernetes server create a user "kubeadmin" and set password and give root user privileges as done previously.Then install and configure kubectl,eksctl,awscli.
 Then create an IAM role in aws for creating,accessing and managing EKS cluster and attach the role to the Kubernetes server through aws(Note: Check eksctl documentaiton for Minimum IAM policies).
@@ -139,6 +148,15 @@ Then click "Apply" -> "save"
 
 Then click on "BUILD NOW"
 Now you can see the above steps jenkins executing in the console output.
+
+Then to verify the deployed containerized web application in "EKS",copy the public ip of one of the Node Instance and paste on the browser as below:-
+```
+http://public_ip:31200/warfilenamewithout".war"extension
+```
+Note:- The 31200 is the port number we specify in the service.yml file inside kubernetes server.To acces the web application through browser, goto Node instance security group and in :- 
+```
+"Inbound rules" -> "add rule" -> "custom TCP" -> port number "31200" -> select "0.0.0.0/0" -> "save"
+```
 Note:- To verify the continuous integration and continuous,just made a change in the source code and push to the GitHub.
 
 That's all,the Project is Completed.
