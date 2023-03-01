@@ -72,6 +72,7 @@ vi main.tf
 ```
 ### Goto Ansible server
 In Ansible server install and setup ansible.
+
 Ansible installation:-
 To install Ansible,refer the below url,
 ```
