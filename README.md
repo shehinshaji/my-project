@@ -53,6 +53,7 @@ systemctl restart sshd
 ```
 ### Goto Terraform server
 In terraformserver install and setup terraform.
+
 Terraform Installation:-
 To install Terraform,refer the below url,
 ```
@@ -79,6 +80,7 @@ To install Ansible,refer the below url,
 https://www.ktexperts.com/how-to-install-ansible-in-amazon-linux-machine/
 ```
 Then also setup an dynamic inventory.
+
 Dynamic inventory setup:-
 To setup dynamic inventory,refer below url,
 ```
@@ -109,6 +111,7 @@ enable_plugins = aws_ec2
 ```
 ### Goto Kubernetes server
 In kubernetes server create a user "kubeadmin" and set password and give root user privileges as done previously.Then install and configure kubectl,eksctl,awscli.
+
 To install awscli,refer below link:-
 ```
 https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
