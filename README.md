@@ -37,7 +37,7 @@ https://devopscube.com/install-maven-guide/
 JENKIN INSTALLATION :- 
 To install Jenkin,refer the below url,
 ~~~
-
+https://www.ktexperts.com/how-to-install-jenkins-in-amazon-linux-machine/
 ~~~
 Then create an new user "jenkinsadmin" and set password and give root user privileges:-
 ```
