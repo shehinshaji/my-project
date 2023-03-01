@@ -102,7 +102,51 @@ Then in, "build triggers" -> select "POLL SCM" and enter "* * * * *".(This cron 
 ```
 Then in, "Build Environment" -> select "Delete workspace before build starts"
 ```
+```
+Then in, "Build Steps" -> select "Invoke top-level Maven targets" -> select the maven version -> Goals -> enter "clean install"(it is maven command to build the code).
+```
+Then again, select "Send files or execute commands over SSH" in "Build steps"-> "select the terraform server already configure in publish over ssh" and in exec command colum enter the below commands :- 
+```
+cd mycreation
+sudo terraform init
+sudo terraform plan 
+sudo terraform apply -auto-approve
+sudo sleep 10
+```
 
+Then again, select "Send files or execute commands over SSH" in "Build steps"-> "select the ansible server already configure in publish over ssh" and in exec command colum enter the below commands :- 
+```
+sudo sh /home/ansadmin/deletescript.sh
+```
+
+Then again, select "Send files or execute commands over SSH" in "Build steps"-> "select the ansible server already configure in publish over ssh" -> "sourcefile"    -> enter  "**/*.war" -> "remote directory" -> enter "warfile" -> In "Exec command" enter the below commands :- 
+```
+sudo ansible all --list
+sudo ansible -m ping all
+sudo ansible-playbook /home/ansadmin/instanceconfigure/ansibleplaybook.yml -e "jenkins_build_number=$BUILD_NUMBER"
+```
+Then again, select "Send files or execute commands over SSH" in "Build steps"-> "select the kubernetes server already configure in publish over ssh" and in exec command colum enter the below commands :- 
+```
+cd /home/kubeadmin/onlinebookstore
+kubectl delete service myapp --ignore-not-found=true
+kubectl delete deployment myapp --ignore-not-found=true
+sudo sed -i "s/tomcatcustom./tomcatcustom.$BUILD_NUMBER/g" deployment.yml
+kubectl apply -f deployment.yml
+kubectl apply -f service.yml
+sudo sed -i "s/tomcatcustom.$BUILD_NUMBER/tomcatcustom./g" deployment.yml
+```
+Then click "Apply" -> "save" 
+
+Then click on "BUILD NOW"
+Now you can see the above steps jenkins executing in the console output.
+Note:- To verify the continuous integration and continuous,just made a change in the source code and push to the GitHub.
+
+That's all,the Project is Completed.
+
+
+
+
+                        
 
 
 
