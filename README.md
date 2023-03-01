@@ -84,6 +84,7 @@ mkdir /home/ansadmin/dockerconfigure
 mkdir /home/ansadmin/dockerconfigure/warfile
 ```
 Then copy and paste the attached "dockerfile & ansibleplaybook.yml" in /home/ansadmin/dockerconfigure.
+Note:- replace the container image name to your container image name and also artifact name too.
 Then generate private key and public key for root user: -
 ```
 ssh-keygen
@@ -101,7 +102,25 @@ enable_plugins = aws_ec2
 ```
 ### Goto Kubernetes server
 In kubernetes server create a user "kubeadmin" and set password and give root user privileges as done previously.Then install and configure kubectl,eksctl,awscli.
+To install awscli,refer below link:-
+```
+https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+```
+To install kubectl,follow below commands:-
+```
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mv ./kubectl /usr/local/bin 
+kubectl version --short --client
+```
+To install eksctl,follow below steps:-
+```
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+eksctl version
+```
 Then create an IAM role in aws for creating,accessing and managing EKS cluster and attach the role to the Kubernetes server through aws(Note: Check eksctl documentaiton for Minimum IAM policies).
+
 Then create the EKS cluster : -
 ```
 eksctl create cluster --name demo-cluster --region ap-south-1 --node-type t2.small
@@ -111,7 +130,8 @@ Then create an directory manifest in /home/kubeadmin
 ```
 mkdir /home/kubeadmin/manifest
 ```
-Then inside manifest copy and paste the attached deployment and service yaml files.
+Then inside "manifest" directory copy and paste the attached deployment and service yaml files.
+Note:- replace the container image name to your conatiner image name
 
 ## Let's build the jenkin job
 
