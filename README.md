@@ -4,6 +4,8 @@
 My aim of this project is,using aws services like EC2 and EKS create some virtual servers,Kubernetes cluster and then setup a jenkin automation job for
 continuously integrate the changes made in application code and deploy it on EKS cluster as a containerized web application.
 And the main aim is to integrate all the tools i studied with this CI/CD project like GIT & GITHUB,MAVEN,JENKINS,ANSIBLE,TERRAFORM,DOCKER,KUBERNETES(EKS).
+## Diagram
+![image](https://user-images.githubusercontent.com/122430265/222518053-6231e31b-4281-4f11-9cb7-7b396d04daee.png)
 
 ### Description
 There are 4 servers that are jenkinserver,ansibleserver,terraformserver and kubernetes server.when a code pushed to github,jenkinserver will pull the code and build the code to generate artifact(maven is also installed in jenkin server).After generating artifact and succesfully storing it,Terraform server will create an instance called "dockerserver" in the same region.After this docker server creation,Ansibleserver will configure the dockerserver by install some dependencies,docker etc.and will copy and paste artifacts,dockerfile also,and execute commands to build an docker image inside docker server and also push the created image to dockerhub(Note:-On each docker image building,the jenkins build number will specify as version of the docker image).After this,the kubernetes server will execute the deployment file to pull the latest image pushed on the dockerhub and will containerize it and then the service file will execute for exposing the containerized web application.
