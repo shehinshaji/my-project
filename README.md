@@ -96,7 +96,7 @@ mkdir /home/ansadmin/dockerconfigure/warfile
 ```
 Then copy and paste the attached "dockerfile & ansibleplaybook.yml" in /home/ansadmin/dockerconfigure.
 Note:- replace the container image name to your container image name and also artifact name too.
-Then generate private key and public key for root user: -
+Then generate private key and public key for ansadmin user: -
 ```
 ssh-keygen
 ```
@@ -107,6 +107,7 @@ Then goto /etc/ansible/ansible.cfg and under [defaults] & [inventory] add below 
 [defaults]
 inventory = /opt/ansible/inventory/aws_ec2.yaml
 host_key_checking = False
+remote_user = root
 
 [inventory]
 enable_plugins = aws_ec2
