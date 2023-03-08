@@ -3,7 +3,7 @@
 ## Aim
 My aim of this project is,using aws services like EC2 and EKS create some virtual servers,Kubernetes cluster and then setup a jenkin automation job for
 continuously integrate the changes made in application code and deploy it on EKS cluster as a containerized web application.
-And the main aim is to integrate all the tools i studied with this CI/CD project likeGIT&GITHUB,MAVEN,JENKINS,ANSIBLE,TERRAFORM,DOCKER,KUBERNETES(EKS).
+And the main aim is to integrate all the tools i studied with this CI/CD projectlikeGIT&GITHUB,MAVEN,JENKINS,ANSIBLE,TERRAFORM,DOCKER,KUBERNETES(EKS).
 ## Diagram
 ![image](https://user-images.githubusercontent.com/122430265/222518053-6231e31b-4281-4f11-9cb7-7b396d04daee.png)
 
