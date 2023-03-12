@@ -5,7 +5,8 @@ My aim of this project is,using aws services like EC2 and EKS create some virtua
 continuously integrate the changes made in application code and deploy it on EKS cluster as a containerized web application.
 And the main aim is to integrate all the tools i studied with this CI/CD project.ie; "git & github,maven,jenkins,ansible,terraform,docker,kubernetes(EKS)".
 ## Diagram
-![image](https://user-images.githubusercontent.com/122430265/222518053-6231e31b-4281-4f11-9cb7-7b396d04daee.png)
+![image](https://user-images.githubusercontent.com/122430265/224565929-c83f46c0-4966-4dcd-9be5-c7330fee835b.png)
+
 
 ### Description
 There are 4 servers that are jenkinserver,ansibleserver,terraformserver and kubernetes server.when a code pushed to github,jenkinserver will pull the code and build the code to generate artifact(maven is also installed in jenkin server).After generating artifact and succesfully storing it,Terraform server will create an instance called "dockerserver" in the same region.After this docker server creation,Ansibleserver will configure the dockerserver by install some dependencies,docker etc.and will copy and paste artifacts,dockerfile also,and execute commands to build an docker image inside docker server and also push the created image to dockerhub(Note:-On each docker image building,the jenkins build number will specify as version of the docker image).After this,the kubernetes server will execute the deployment file to pull the latest image pushed on the dockerhub and will containerize it and then the service file will execute for exposing the containerized web application.
@@ -196,6 +197,11 @@ Then again, select "Send files or execute commands over SSH" in "Build steps"-> 
 sudo ansible all --list
 sudo ansible -m ping all
 sudo ansible-playbook /home/ansadmin/instanceconfigure/ansibleplaybook.yml -e "jenkins_build_number=$BUILD_NUMBER"
+```
+Then again, select "Send files or execute commands over SSH" in "Build steps"-> "select the terraform server already configure in publish over ssh" and in exec command colum enter the below commands :-
+```
+cd mycreation
+sudo terraform destroy -auto-approve
 ```
 Then again, select "Send files or execute commands over SSH" in "Build steps"-> "select the kubernetes server already configure in publish over ssh" and in exec command colum enter the below commands :- 
 ```
