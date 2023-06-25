@@ -1,5 +1,5 @@
 # my-project
-## Continuously integrating and continuously deploying a containerized web application to EKS
+## Continuously integrating and continuously deploying a containerized Static web application to EKS
 ## Aim
 My aim of this project is,using aws services like EC2 and EKS create some virtual servers,Kubernetes cluster and then setup a jenkin automation job for
 continuously integrate the changes made in application code and deploy it on EKS cluster as a containerized web application.
